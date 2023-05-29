@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Angular_Final_Proj.props" />
+</Project>
