@@ -11,6 +11,7 @@ namespace Angular_Final_Proj.Models
 
         public DbSet<DepartmentModel> Department { get; set; }
         public DbSet<StudentModel> Student { get; set; }
+        public DbSet<UserModel> User{ get; set; }
 
     }
 }

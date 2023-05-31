@@ -19,6 +19,18 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AngluarProjContext>(options => options.UseSqlServer(builder.Configuration["ConnectionStrings:conString"]));
 builder.Services.AddScoped<StudentService>();
 builder.Services.AddScoped<DepartmentService>();
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+               .AddJwtBearer(options => {
+                   options.TokenValidationParameters = new TokenValidationParameters
+                   {
+                       ValidateIssuerSigningKey = true,
+                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["TokenKey"])),
+                       ValidateIssuer = false,
+                       ValidateAudience = false
+                   };
+               });
 builder.Services.AddCors(c =>
 {
     c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod()
